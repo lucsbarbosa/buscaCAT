@@ -1,0 +1,9 @@
+<header>
+  <img src="assets/images/logo.png" alt="" />
+  <div class="controls">
+    <button mat-flat-button color="accent" [routerLink]="url">
+      {{ url | titlecase }}
+    </button>
+    <button mat-flat-button color="warn" (click)="handleLogout()">Logout</button>
+  </div>
+</header>

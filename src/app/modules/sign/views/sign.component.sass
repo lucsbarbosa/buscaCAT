@@ -1,0 +1,41 @@
+.container
+    height: 100vh
+    display: flex
+    justify-content: center
+
+    div
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        gap: 3.2rem
+
+img, form
+    width: 100%
+
+form
+    display: flex
+    flex-direction: column
+
+input, p
+    color: white
+
+a
+    text-decoration: none
+    color: #ff4080
+
+mat-placeholder
+    color: rgba(255, 255, 255, 0.4)!important
+
+::ng-deep .mat-focused,  ::ng-deep .mat-placeholder-required
+    color: rgb(255, 64, 128)!important
+
+::ng-deep .mat-form-field-underline
+    background-color: rgba(255, 255, 255, 0.4)!important
+
+::ng-deep .mat-form-field-ripple
+    background-color: rgba(255, 64, 128, .4)!important
+
+::ng-deep .mat-button-disabled
+    background-color: rgba(255, 64, 128, 0.4)!important
+    color: rgba(255, 255, 255, 0.4)!important

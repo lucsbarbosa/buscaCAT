@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="image-container">
+    <!-- <ngx-skeleton-loader
+      animation="pulse"
+      [theme]="{
+        height: '100%'
+      }"
+      *ngIf="loading"
+    ></ngx-skeleton-loader> -->
+    <img [src]="catData.url" alt="" />
+  </div>
+  <div class="info">
+    <h3>{{ catData.breeds[0].name }}</h3>
+    <p>Origin: {{ catData.breeds[0].origin }}</p>
+    <mat-chip-list #chipList>
+      <mat-chip
+        *ngFor="let temperament of catData.breeds[0].temperament.split(', ')"
+        >{{ temperament }}</mat-chip
+      >
+    </mat-chip-list>
+    <p>{{ catData.breeds[0].description }}</p>
+    <div>
+      <p>Health issues: {{ catData.breeds[0].health_issues }}</p>
+      <mat-progress-bar
+        mode="determinate"
+        color="accent"
+        [value]="catData.breeds[0].health_issues * 20"
+      ></mat-progress-bar>
+    </div>
+    <div>
+      <p>Energy: {{ catData.breeds[0].energy_level }}</p>
+      <mat-progress-bar
+        mode="determinate"
+        color="accent"
+        [value]="catData.breeds[0].energy_level * 20"
+      ></mat-progress-bar>
+    </div>
+    <div>
+      <p>Intelligence: {{ catData.breeds[0].intelligence }}</p>
+      <mat-progress-bar
+        mode="determinate"
+        color="accent"
+        [value]="catData.breeds[0].intelligence * 20"
+      ></mat-progress-bar>
+    </div>
+    <div>
+      <p>Weight: {{ catData.breeds[0].weight.metric }} KG</p>
+    </div>
+    <p>
+      More in
+      <a [href]="catData.breeds[0].wikipedia_url" target="_blank">Wikipedia</a>
+    </p>
+    <button mat-button color="accent" (click)="handleFavourite()" *ngIf="!favorited">Favourite</button>
+    <button mat-flat-button color="accent" (click)="handleUnfavourite()" *ngIf="favorited">Unfavourite</button>
+  </div>
+</div>
