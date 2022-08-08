@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { CatAPIService } from '../../services/cat-api.service';
 
 @Component({
@@ -6,10 +12,13 @@ import { CatAPIService } from '../../services/cat-api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   cats: any[];
   index: number;
-  currentCat: any;
+
+  cardsWidth!: number;
+
+  @ViewChild('cards') ref!: ElementRef;
 
   constructor(private catAPI: CatAPIService) {
     this.cats = [];
@@ -20,26 +29,33 @@ export class HomeComponent implements OnInit {
     this.loadCats();
   }
 
+  ngAfterViewInit(): void {
+    this.cardsWidth = this.ref.nativeElement.offsetWidth;
+  }
+
   loadCats() {
     this.catAPI.getCats().subscribe((cats) => {
       this.cats.push(...cats);
-      this.index == 0 ? (this.currentCat = this.cats[this.index]) : null;
     });
   }
 
   goForward() {
     const newIndex = (this.index += 1);
-    if (newIndex == Math.ceil(this.cats.length / 2)) {
-      this.loadCats();
-    }
-    this.currentCat = this.cats[newIndex];
-    console.log(this.currentCat);
+    newIndex == Math.ceil(this.cats.length / 2) ? this.loadCats() : null;
+    this.ref.nativeElement.style.transform = `translateX(-${
+      (this.cardsWidth + 16) * this.index
+    }px)`;
   }
 
   goBack() {
     let newIndex: number = (this.index -= 1);
-    newIndex < 0 ? (this.index = 0) : (this.index = newIndex);
-    console.log(this.index);
-    this.currentCat = this.cats[this.index];
+    if (newIndex < 0) {
+      this.index = 0;
+      return;
+    }
+    this.index = newIndex;
+    this.ref.nativeElement.style.transform = `translateX(-${
+      (this.cardsWidth + 16) * this.index
+    }px)`;
   }
 }

@@ -13,6 +13,7 @@ import { ContentComponent } from './content.component';
 import { HomeComponent } from './views/home/home.component';
 import { FavouritesComponent } from './views/favourites/favourites.component';
 
+import { PreviewComponent } from './components/preview/preview.component';
 import { CardComponent } from './components/card/card.component';
 import { HeaderComponent } from './components/header/header.component';
 
@@ -26,6 +27,7 @@ import { AuthGuard } from './guards/auth.guard';
     CardComponent,
     HomeComponent,
     FavouritesComponent,
+    PreviewComponent,
   ],
   imports: [
     CommonModule,

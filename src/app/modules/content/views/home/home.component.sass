@@ -1,20 +1,26 @@
 main
     padding: 0 9.6rem
-
-div
     display: flex
-    justify-content: center
     align-items: center
-    gap: 1.6rem
-    width: 100%
-    position: relative
+    justify-content: space-between
+
+    .cards
+        overflow-x: hidden
+        width: 100%
+
+        div
+            display: flex
+            align-items: center
+            transition: 500ms ease
+            gap: 1.6rem   
 
 app-card
-    flex: 1
+    flex-shrink: 0
+    width: 100%
 
 mat-icon
     height: unset
-    width: unset
+    width: fit-content
     z-index: 1
     font-size: 8rem!important
     color: white

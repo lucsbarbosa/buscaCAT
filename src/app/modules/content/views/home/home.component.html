@@ -1,7 +1,9 @@
 <main>
-    <div>
-        <mat-icon style="left: 0" (click)="goBack()">arrow_back_ios</mat-icon>
-        <app-card [catData]="currentCat"></app-card>
-        <mat-icon style="right: 0" (click)="goForward()">arrow_forward_ios</mat-icon>
+  <mat-icon style="left: 0" (click)="goBack()">arrow_back_ios</mat-icon>
+  <div class="cards">
+    <div #cards>
+        <app-card *ngFor="let cat of cats" [catData]="cat"></app-card>
     </div>
+  </div>
+  <mat-icon style="right: 0" (click)="goForward()">arrow_forward_ios</mat-icon>
 </main>
