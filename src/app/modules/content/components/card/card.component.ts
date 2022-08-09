@@ -9,13 +9,13 @@ import { CatAPIService } from '../../services/cat-api.service';
 })
 export class CardComponent implements OnInit {
   @Input() catData!: any;
+  @Input() favourited: boolean;
+  @Input() id!: number;
   loading: boolean;
-  favorited: boolean;
-  id!: number;
 
   constructor(private catAPI: CatAPIService, private uiService: UiService) {
     this.loading = true;
-    this.favorited = false;
+    this.favourited = false;
   }
 
   ngOnInit(): void {}
@@ -26,7 +26,7 @@ export class CardComponent implements OnInit {
       .subscribe((response) => {
         if (response.message == "SUCCESS") {
           this.id = response.id
-          this.favorited = true;
+          this.favourited = true;
         }
       });
   } 
@@ -34,7 +34,7 @@ export class CardComponent implements OnInit {
   handleUnfavourite() {
     this.catAPI.deleteFavorite(this.id, this.uiService.getFav()).subscribe((response) => {
       if (response.message == 'SUCCESS') {
-        this.favorited = false
+        this.favourited = false
       } 
     });
   }

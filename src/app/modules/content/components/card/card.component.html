@@ -50,7 +50,7 @@
       More in
       <a [href]="catData.breeds[0].wikipedia_url" target="_blank">Wikipedia</a>
     </p>
-    <button mat-button color="accent" (click)="handleFavourite()" *ngIf="!favorited">Favourite</button>
-    <button mat-flat-button color="accent" (click)="handleUnfavourite()" *ngIf="favorited">Unfavourite</button>
+    <button mat-button color="accent" (click)="handleFavourite()" *ngIf="!favourited">Favourite</button>
+    <button mat-flat-button color="accent" (click)="handleUnfavourite()" *ngIf="favourited">Unfavourite</button>
   </div>
 </div>

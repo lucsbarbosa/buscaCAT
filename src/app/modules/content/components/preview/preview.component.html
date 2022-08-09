@@ -2,6 +2,6 @@
 
     <img mat-card-image [src]="previewData.url" alt="" />
     <mat-card-actions>
-      <button mat-stroked-button color="accent">Know more</button>
+      <button mat-stroked-button color="accent" [routerLink]="'../home/cat/' + previewData.id">Know more</button>
     </mat-card-actions>
   </mat-card>

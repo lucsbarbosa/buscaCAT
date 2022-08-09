@@ -30,7 +30,8 @@ export class FavouritesComponent implements OnInit {
           this.columns[minHeightIndex].push(response);
         });
       });
-      console.log(this.columns)
     });
   }
+
+  
 }

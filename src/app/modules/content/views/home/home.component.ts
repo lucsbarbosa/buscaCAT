@@ -5,6 +5,8 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UiService } from 'src/app/shared/services/ui.service';
 import { CatAPIService } from '../../services/cat-api.service';
 
 @Component({
@@ -15,17 +17,27 @@ import { CatAPIService } from '../../services/cat-api.service';
 export class HomeComponent implements OnInit, AfterViewInit {
   cats: any[];
   index: number;
+  hasFavourite: boolean;
 
   cardsWidth!: number;
 
   @ViewChild('cards') ref!: ElementRef;
 
-  constructor(private catAPI: CatAPIService) {
+  constructor(
+    private catAPI: CatAPIService,
+    private route: ActivatedRoute,
+    private uiService: UiService
+  ) {
     this.cats = [];
     this.index = 0;
+    this.hasFavourite = false;
   }
 
   ngOnInit(): void {
+    const id: string | undefined = this.route.snapshot.params['id'];
+    if (id != undefined) {
+     
+    }
     this.loadCats();
   }
 
