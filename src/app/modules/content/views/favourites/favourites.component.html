@@ -1,5 +1,6 @@
+<app-loading text="Loading favourites..." *ngIf="loading"></app-loading>
 <main>
-    <div class="column" *ngFor="let column of columns">
-        <app-preview *ngFor="let cat of column" [previewData]="cat"></app-preview>
-    </div>
+  <div *ngFor="let column of cats">
+    <app-preview *ngFor="let cat of column" [previewData]="cat"></app-preview>
+  </div>
 </main>

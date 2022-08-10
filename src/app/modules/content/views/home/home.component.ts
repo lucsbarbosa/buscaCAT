@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UiService } from 'src/app/shared/services/ui.service';
+import { Component, OnInit } from '@angular/core';
 import { CatAPIService } from '../../services/cat-api.service';
 
 @Component({
@@ -14,49 +6,36 @@ import { CatAPIService } from '../../services/cat-api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass'],
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   cats: any[];
   index: number;
   hasFavourite: boolean;
 
+  loading: boolean
+
   cardsWidth!: number;
 
-  @ViewChild('cards') ref!: ElementRef;
-
-  constructor(
-    private catAPI: CatAPIService,
-    private route: ActivatedRoute,
-    private uiService: UiService
-  ) {
+  constructor(private catAPI: CatAPIService) {
     this.cats = [];
     this.index = 0;
+    this.loading = true;
     this.hasFavourite = false;
   }
 
   ngOnInit(): void {
-    const id: string | undefined = this.route.snapshot.params['id'];
-    if (id != undefined) {
-     
-    }
     this.loadCats();
-  }
-
-  ngAfterViewInit(): void {
-    this.cardsWidth = this.ref.nativeElement.offsetWidth;
   }
 
   loadCats() {
     this.catAPI.getCats().subscribe((cats) => {
       this.cats.push(...cats);
+      this.loading = false;
     });
   }
 
   goForward() {
-    const newIndex = (this.index += 1);
-    newIndex == Math.ceil(this.cats.length / 2) ? this.loadCats() : null;
-    this.ref.nativeElement.style.transform = `translateX(-${
-      (this.cardsWidth + 16) * this.index
-    }px)`;
+    this.index += 1;
+    this.index == Math.ceil(this.cats.length / 2) ? this.loadCats() : null;
   }
 
   goBack() {
@@ -66,8 +45,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       return;
     }
     this.index = newIndex;
-    this.ref.nativeElement.style.transform = `translateX(-${
-      (this.cardsWidth + 16) * this.index
-    }px)`;
+  }
+
+  handleFavourited(id: string) {
+    for (let i = 0; i < this.cats.length; i++) {
+      if (this.cats[i].id == id) {
+        this.cats.splice(i, 1)
+        // LANÇAR TOAST
+      }
+    }
   }
 }

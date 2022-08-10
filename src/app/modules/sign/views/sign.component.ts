@@ -14,7 +14,8 @@ import { TitleCasePipe } from '@angular/common';
 export class SignComponent implements OnInit {
   currentRoute: string;
   signData: FormGroup;
-  error: string | null;
+  error: string | boolean;
+  loading: boolean;
 
   constructor(
     private signAPI: SignAPIService,
@@ -24,7 +25,8 @@ export class SignComponent implements OnInit {
     private uiService: UiService,
     private titleCase: TitleCasePipe
   ) {
-    this.error = null;
+    this.error = false;
+    this.loading = true;
     this.currentRoute = this.router.url.substring(6);
     this.signData = this.builder.group({
       username: ['', Validators.required],
@@ -81,6 +83,8 @@ export class SignComponent implements OnInit {
           this.router.navigate(['../../content']);
         }
       });
+    } else {
+      this.loading = false
     }
   }
 }

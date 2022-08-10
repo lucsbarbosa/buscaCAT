@@ -1,7 +1,12 @@
-<mat-card class="example-card">
-
-    <img mat-card-image [src]="previewData.url" alt="" />
-    <mat-card-actions>
-      <button mat-stroked-button color="accent" [routerLink]="'../home/cat/' + previewData.id">Know more</button>
-    </mat-card-actions>
-  </mat-card>
+<mat-card>
+  <img mat-card-image [src]="previewData.image.url" alt="" />
+  <mat-card-actions>
+    <button
+      mat-stroked-button
+      color="accent"
+      [routerLink]="'../favouriteCat/' + previewData.image_id"
+    >
+      Know more
+    </button>
+  </mat-card-actions>
+</mat-card>

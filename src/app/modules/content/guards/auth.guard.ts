@@ -6,7 +6,7 @@ import { UiService } from 'src/app/shared/services/ui.service';
 export class AuthGuard implements CanActivate {
   constructor(private uiService: UiService, private router: Router) {}
   canActivate(): boolean {
-    if (this.uiService.isLogged()) {
+    if (this.uiService.isLogged() ) {
       return true;
     } else {
       this.router.navigate(['../sign']);

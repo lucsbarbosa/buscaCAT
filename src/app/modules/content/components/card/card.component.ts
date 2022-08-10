@@ -1,4 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UiService } from 'src/app/shared/services/ui.service';
 import { CatAPIService } from '../../services/cat-api.service';
 
@@ -7,35 +15,49 @@ import { CatAPIService } from '../../services/cat-api.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.sass'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnChanges {
   @Input() catData!: any;
-  @Input() favourited: boolean;
   @Input() id!: number;
-  loading: boolean;
+  @Input() fromCatPage: boolean;
+  favourited: boolean;
 
-  constructor(private catAPI: CatAPIService, private uiService: UiService) {
-    this.loading = true;
+  @Output() catFavourited = new EventEmitter<string>();
+
+  constructor(
+    private catAPI: CatAPIService,
+    private uiService: UiService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.favourited = false;
+    this.fromCatPage = false;
   }
 
-  ngOnInit(): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.fromCatPage ? (this.favourited = true) : (this.favourited = false);
+  }
 
   handleFavourite() {
     this.catAPI
       .postFavorite(this.catData.id, this.uiService.getFav())
       .subscribe((response) => {
-        if (response.message == "SUCCESS") {
-          this.id = response.id
+        if (response.message == 'SUCCESS') {
+          this.catFavourited.emit(this.catData.id);
+          this.id = response.id;
           this.favourited = true;
         }
       });
-  } 
+  }
 
   handleUnfavourite() {
-    this.catAPI.deleteFavorite(this.id, this.uiService.getFav()).subscribe((response) => {
-      if (response.message == 'SUCCESS') {
-        this.favourited = false
-      } 
-    });
+    this.catAPI
+      .deleteFavorite(this.id, this.uiService.getFav())
+      .subscribe((response) => {
+        if (response.message == 'SUCCESS') {
+          this.router.navigate(['../../favourites'], {
+            relativeTo: this.route,
+          });
+        }
+      });
   }
 }

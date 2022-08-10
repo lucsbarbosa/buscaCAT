@@ -1,15 +1,8 @@
+<app-loading text="Loading cats..." *ngIf="loading"></app-loading>
 <main>
-  <mat-icon style="left: 0" (click)="goBack()">arrow_back_ios</mat-icon>
-  <div class="cards">
-    <div #cards>
-      <app-card
-        *ngIf="hasFavourite"
-        [catData]="cats[0]"
-        [id]="cats[0].id"
-        [favourited]="true"
-      ></app-card>
-      <app-card *ngFor="let cat of cats" [catData]="cat"></app-card>
-    </div>
+  <mat-icon (click)="goBack()">arrow_back_ios</mat-icon>
+  <div style="width: 100%">
+      <app-card [catData]="cats[index]" (catFavourited)="handleFavourited($event)"></app-card>
   </div>
-  <mat-icon style="right: 0" (click)="goForward()">arrow_forward_ios</mat-icon>
+  <mat-icon (click)="goForward()">arrow_forward_ios</mat-icon>
 </main>

@@ -17,8 +17,12 @@ import { PreviewComponent } from './components/preview/preview.component';
 import { CardComponent } from './components/card/card.component';
 import { HeaderComponent } from './components/header/header.component';
 
+import { LoadingModule } from 'src/app/shared/components/loading/loading.module';
+import { ToastModule } from 'src/app/shared/components/toast/toast.module';
+
 import { TitleCasePipe } from '@angular/common';
 import { AuthGuard } from './guards/auth.guard';
+import { FavouriteCatComponent } from './views/favourite-cat/favourite-cat.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import { AuthGuard } from './guards/auth.guard';
     HomeComponent,
     FavouritesComponent,
     PreviewComponent,
+    FavouriteCatComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +40,8 @@ import { AuthGuard } from './guards/auth.guard';
     DesignModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,
+    LoadingModule,
+    ToastModule
   ],
   providers: [
     TitleCasePipe,

@@ -46,7 +46,9 @@ export class HeaderComponent implements OnInit {
 
   private updateUrl(ref: any): void {
     const url = ref.url.substring(9);
-    this.title.setTitle(`BuscaCAT - ${this.titleCase.transform(url)}`)
-    url == 'home' ? (this.url = 'favourites') : (this.url = 'home');
+    this.title.setTitle(`BuscaCAT - ${this.titleCase.transform(url)}`);
+    url == 'home' || url.startsWith('favouriteCat')
+      ? (this.url = 'favourites')
+      : (this.url = 'home');
   }
 }

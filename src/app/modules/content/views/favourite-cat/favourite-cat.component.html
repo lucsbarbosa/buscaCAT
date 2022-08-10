@@ -1,0 +1,10 @@
+<app-loading text="Loading favourite cat..." *ngIf="loading"></app-loading>
+<main>
+  <div style="width: 100%">
+    <app-card
+      [catData]="cat"
+      [id]="id"
+      [fromCatPage]="true"
+    ></app-card>
+  </div>
+</main>
