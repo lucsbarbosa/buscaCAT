@@ -13,6 +13,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/content/content.module').then((m) => m.ContentModule),
   },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./modules/not-found/not-found.module').then(m => m.NotFoundModule)
+  }
 ];
 
 @NgModule({

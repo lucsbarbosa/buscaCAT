@@ -25,6 +25,7 @@ export class FavouritesComponent implements OnInit {
         this.index + 1 < this.cats.length ? this.index += 1 : this.index = 0;
       });
       this.loading = false;
+      console.log(favourites)
     });
   }
 }

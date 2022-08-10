@@ -2,6 +2,7 @@
     display: flex
     align-items: center
     height: calc(100vh - 16rem)
+    gap: .8rem
     width: 100%
     overflow: hidden
 
@@ -10,6 +11,7 @@
     height: 100%
     width: 50%
     text-align: center
+    position: relative
 
     img
         object-fit: contain
@@ -17,6 +19,9 @@
         max-width: 100%
 
 .info
+    display: flex
+    flex-direction: column
+    gap: 1.6rem
     background-color: white
     padding: 1.6rem
     border-radius: .8rem
@@ -30,5 +35,29 @@ a
 button
     width: 100%
 
+    div
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-direction: row
+        gap: .8rem
+
+.info-title
+    widows: 100%
+    display: flex
+    align-items: center
+    gap: .8rem
+
+p
+    margin: 0
+
 h3
     font-weight: bold
+    margin-bottom: .4rem
+
+mat-progress-bar
+    margin-top: .8rem
+
+.skeleton
+    position: absolute
+    inset: 0

@@ -1,1 +1,3 @@
-<p>toast works!</p>
+<div [ngClass]="{ error: mode == 'error', success: mode == 'success' }">
+  <p>{{ text }}</p>
+</div>

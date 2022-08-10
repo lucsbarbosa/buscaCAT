@@ -19,7 +19,10 @@ export class CardComponent implements OnChanges {
   @Input() catData!: any;
   @Input() id!: number;
   @Input() fromCatPage: boolean;
+
   favourited: boolean;
+  clicked: boolean;
+  imgLoaded: boolean;
 
   @Output() catFavourited = new EventEmitter<string>();
 
@@ -31,6 +34,8 @@ export class CardComponent implements OnChanges {
   ) {
     this.favourited = false;
     this.fromCatPage = false;
+    this.clicked = false;
+    this.imgLoaded = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -38,6 +43,7 @@ export class CardComponent implements OnChanges {
   }
 
   handleFavourite() {
+    this.clicked = true;
     this.catAPI
       .postFavorite(this.catData.id, this.uiService.getFav())
       .subscribe((response) => {
@@ -45,11 +51,15 @@ export class CardComponent implements OnChanges {
           this.catFavourited.emit(this.catData.id);
           this.id = response.id;
           this.favourited = true;
+        } else {
+            // lançar toast
         }
+        this.clicked = false;
       });
   }
 
   handleUnfavourite() {
+    this.clicked = true;
     this.catAPI
       .deleteFavorite(this.id, this.uiService.getFav())
       .subscribe((response) => {
@@ -57,7 +67,10 @@ export class CardComponent implements OnChanges {
           this.router.navigate(['../../favourites'], {
             relativeTo: this.route,
           });
+        } else {
+          // ad
         }
+        this.clicked = false;
       });
   }
 }

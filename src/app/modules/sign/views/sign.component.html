@@ -1,40 +1,47 @@
+<app-toast
+  [text]="error"
+  mode="error"
+  (closeToast)="error = false"
+  *ngIf="error"
+></app-toast>
 <app-loading text="Loading sign page..." *ngIf="loading"></app-loading>
 <div class="container">
   <div>
-      <img src="assets/images/logo.png" alt="" />
-      <form [formGroup]="signData" (submit)="handleSubmit()">
-        <mat-form-field>
-          <mat-placeholder>Nome de usuário</mat-placeholder>
-          <input
-            matInput
-            formControlName="username"
-            type="text"
-            autocomplete="username"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-placeholder>Senha</mat-placeholder>
-          <input
-            matInput
-            formControlName="password"
-            type="password"
-            autocomplete="current-password"
-          />
-        </mat-form-field>
-        <button
-          mat-flat-button
-          color="accent"
-          type="submit"
-          [disabled]="!signData.valid"
-        >
-          {{ currentRoute == "login" ? "Entrar" : "Cadastrar" }}
-        </button>
-      </form>
-      <p *ngIf="currentRoute == 'login'">
-        Ainda não tem uma conta? <a routerLink="../signup">Cadastre-se</a>
-      </p>
-      <p *ngIf="currentRoute == 'signup'">
-        Já tem uma conta? <a routerLink="../login" >Entre</a>
-      </p>
+    <img src="assets/images/logo.png" alt="" />
+    <form [formGroup]="signData" (submit)="handleSubmit()">
+      <mat-form-field>
+        <mat-placeholder>Nome de usuário</mat-placeholder>
+        <input
+          matInput
+          formControlName="username"
+          type="text"
+          autocomplete="username"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-placeholder>Senha</mat-placeholder>
+        <input
+          matInput
+          formControlName="password"
+          type="password"
+          autocomplete="current-password"
+        />
+      </mat-form-field>
+      <p *ngIf="currentRoute == 'signup' && !this.signData.get('password')!.valid">The password needs to be 8 characters long</p>
+      <button
+        mat-flat-button
+        color="accent"
+        type="submit"
+        [disabled]="!signData.valid"
+      >
+        {{ currentRoute == "login" ? "Entrar" : "Cadastrar" }}
+      </button>
+    </form>
+    <p *ngIf="currentRoute == 'login'">
+      Ainda não tem uma conta? <a routerLink="../signup">Cadastre-se</a>
+    </p>
+    <p *ngIf="currentRoute == 'signup'">
+      Já tem uma conta? <a routerLink="../login">Entre</a>
+    </p>
   </div>
 </div>

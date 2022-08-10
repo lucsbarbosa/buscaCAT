@@ -11,7 +11,8 @@ export class HomeComponent implements OnInit {
   index: number;
   hasFavourite: boolean;
 
-  loading: boolean
+  loading: boolean;
+  showToast: boolean;
 
   cardsWidth!: number;
 
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
     this.cats = [];
     this.index = 0;
     this.loading = true;
+    this.showToast = false;
     this.hasFavourite = false;
   }
 
@@ -50,8 +52,8 @@ export class HomeComponent implements OnInit {
   handleFavourited(id: string) {
     for (let i = 0; i < this.cats.length; i++) {
       if (this.cats[i].id == id) {
-        this.cats.splice(i, 1)
-        // LANÇAR TOAST
+        this.cats.splice(i, 1);
+        this.showToast = true
       }
     }
   }
